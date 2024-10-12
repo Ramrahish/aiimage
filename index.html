@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Generative Images</title>
+  <link rel="stylesheet" href="styles.css">
+   
+</head>
+<body >
+
+  <!-- Header with Flexbox Layout -->
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="logo.png" alt="Company Logo" height="40px"></a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Tools.html">Tools</a></li>
+        <li><a href="images.html">Images</a></li>
+        <li>
+          <a href="#">Categories</a>
+          <div class="dropdown">
+            <ul>
+              <li><a href="nature.html">Nature</a></li>
+              <li><a href="Food_Objects.html">Food and Objects</a></li>
+              <li><a href="Sci_Fi.html">Fantasy and Sci-Fi</a></li>
+              <li><a href="Designs.html">Architectural Designs</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Search Bar -->
+ <!--  <div class="search-bar">
+    <input type="text" placeholder="Search AI generated images...">
+    <button type="submit">Search</button>
+  </div>
+ -->
+  <!-- Image Gallery -->
+
+  <!-- About Section -->
+  <section class="about-ai">
+      <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search AI generated images...">
+    <button type="submit">Search</button>
+  </div>
+
+    <h2>How AI Generative Image Technology Works</h2>
+    <p class="styled-text">
+      AI Generative Image technology uses advanced machine learning algorithms to create images based on patterns, data, and instructions. 
+      These models, often built on neural networks, can generate stunning visuals that mimic reality or create entirely new concepts.
+      This technology is revolutionizing industries such as design, entertainment, and art by allowing creators to experiment 
+      with visuals that are impossible to produce through traditional methods. The potential of AI-generated images is vast, 
+      offering endless creative possibilities in digital media.
+    </p>
+
+     <button class="nav-button left-button">&#10094;</button>
+     <button class="nav-button right-button">&#10095;</button>
+  </section>
+
+
+
+   <section class="gallery">
+    <div class="gallery-item">
+      <img src="flower.jpg" alt="Image 1">
+      <a href="flower.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+    <div class="gallery-item">
+      <img src="sunrise.jpg" alt="Image 2">
+      <a href="sunrise.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+    <div class="gallery-item">
+      <img src="sunset.jpg" alt="Image 3">
+      <a href="sunset.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+    <div class="gallery-item">
+      <img src="village.jpg" alt="Image 4">
+      <a href="village.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+       <div class="gallery-item">
+      <img src="sunrise.jpg" alt="Image 2">
+      <a href="sunrise.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+     <div class="gallery-item">
+      <img src="flower.jpg" alt="Image 1">
+      <a href="flower.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+    <div class="gallery-item">
+      <img src="village.jpg" alt="Image 4">
+      <a href="village.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+    <div class="gallery-item">
+      <img src="sunset.jpg" alt="Image 3">
+      <a href="sunset.jpg" download><i class="download-icon">⬇️</i></a>
+    </div>
+      </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 AI Image | All rights reserved.</p>
+  </footer>
+
+  <script>
+  // Array of background images
+const images = [
+  'bg.jpg',
+  'sunset.jpg',
+  'flower.jpg',
+  'sunrise.jpg'
+];
+
+// Current image index
+let currentIndex = 0;
+
+// Select DOM elements
+const aboutSection = document.querySelector('.about-ai');
+const leftButton = document.querySelector('.left-button');
+const rightButton = document.querySelector('.right-button');
+
+// Function to update background image
+function updateBackground() {
+  aboutSection.style.backgroundImage = `url('${images[currentIndex]}')`;
+}
+
+// Initialize background
+updateBackground();
+
+// Event listeners for buttons
+leftButton.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateBackground();
+  resetAutoScroll();
+});
+
+rightButton.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateBackground();
+  resetAutoScroll();
+});
+
+// Auto-scroll functionality
+// let autoScrollInterval = setInterval(() => {
+//   currentIndex = (currentIndex + 1) % images.length;
+//   updateBackground();
+// }, 5000); // Change image every 5 seconds
+
+// Added this function
+function startAutoScrollWithDelay() {
+  setTimeout(() => {
+    startAutoScroll(); // Start auto-scroll after delay
+  }, 1000); // 1-second delay before auto-scroll starts
+}
+let autoScrollInterval = null;
+startAutoScrollWithDelay(); // Add initial delay
+
+// Pause auto-scroll on hover
+aboutSection.addEventListener('mouseenter', () => {
+  clearInterval(autoScrollInterval);
+});
+
+aboutSection.addEventListener('mouseleave', () => {
+  startAutoScroll();
+});
+
+// Function to start auto-scroll
+function startAutoScroll() {
+  clearInterval(autoScrollInterval);
+  autoScrollInterval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateBackground();
+  }, 3500);
+}
+
+// Function to reset auto-scroll timer
+function resetAutoScroll() {
+  startAutoScroll();
+}
+/* javascript for search bar of images*/
+// Search functionality
+const searchInput = document.getElementById('search-input');
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+
+  galleryItems.forEach(item => {
+    const imgAlt = item.querySelector('img').alt.toLowerCase();
+    if (imgAlt.includes(searchTerm)) {
+      item.style.display = 'block'; // Show item if it matches
+    } else {
+      item.style.display = 'none'; // Hide item if it doesn't match
+    }
+  });
+});
+
+
+  </script>
+
+</body>
+</html>
